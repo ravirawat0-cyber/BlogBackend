@@ -11,7 +11,6 @@ public class BlogRepository : IBlogRepository
     {
         _dbContext = dbContext;
     }
-
     public async Task<IEnumerable<Blog>> GetAllBlogs()
     {
         return await _dbContext.Blog.Find(_ => true).ToListAsync();
@@ -22,14 +21,14 @@ public class BlogRepository : IBlogRepository
         return await _dbContext.Blog.Find(b => b.Id == blogId).FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<string>> GetAllTopics()
+    public async Task<IEnumerable<string>> GetAllTags()
     {
         return await _dbContext.Blog.Distinct<string>("tags", Builders<Blog>.Filter.Empty).ToListAsync();
     }
 
-    public async Task<IEnumerable<Blog>> GetBlogsByTopic(string topic)
+    public async Task<IEnumerable<Blog>> GetBlogsByTag(string tag)
     {
-        return await _dbContext.Blog.Find(b => b.Tags.Contains(topic)).ToListAsync();
+        return await _dbContext.Blog.Find(b => b.Tags.Contains(tag)).ToListAsync();
     }
 
     public async Task<IEnumerable<Blog>> GetFavouriteBlogs()

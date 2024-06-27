@@ -1,16 +1,17 @@
 ﻿using BlogBackend.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BlogBackend.Service;
 
 public interface IBlogService
 {
-    Task<IEnumerable<Blog>> GetAllBlogs();
-    Task<Blog> GetBlogById(string id);
-    Task<IEnumerable<string>> GetAllTopics();
-    Task<IEnumerable<Blog>> GetBlogsByTopic(string topic);
-    Task<IEnumerable<Blog>> GetFavouriteBlogs();
+    Task<ApiResponse<IEnumerable<Blog>>> GetAllBlogs();
+    Task<ApiResponse<Blog>> GetBlogById(string id);
+    Task<ApiResponse<IEnumerable<string>>> GetAllTags();
+    Task<ApiResponse<IEnumerable<Blog>>> GetBlogsByTag(string tag);
+    Task<ApiResponse<IEnumerable<Blog>>> GetFavouriteBlogs();
     Task AddBlog(BlogRequest blog, string[] secreteKey);
     Task UpdateBlog(string id, BlogRequest blog, string[] secreteKey);
-    Task DeleteBlog(string id);
+    Task DeleteBlog(string id, string[] secreteKey);
 }

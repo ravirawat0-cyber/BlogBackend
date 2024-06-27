@@ -28,7 +28,7 @@ namespace BlogBackend.Models
     public class BlogRequest
     {
         public string Title { get; set; }
-        public string BlogContent { get; set; }
         public List<string> Tags { get; set; }
+        public string BlogContent { get; set; }
     }
 }

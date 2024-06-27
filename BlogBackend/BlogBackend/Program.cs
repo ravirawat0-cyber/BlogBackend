@@ -1,3 +1,4 @@
+using BlogBackend.CustomMiddleware;
 using BlogBackend.Repository;
 using BlogBackend.Service;
 
@@ -33,6 +34,7 @@ public class Program
 
         app.UseAuthorization();
 
+        app.UseMiddleware<GlobalException>();
 
         app.MapControllers();
 

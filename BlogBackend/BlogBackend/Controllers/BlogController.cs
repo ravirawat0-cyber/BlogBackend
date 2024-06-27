@@ -29,17 +29,17 @@ public class BlogController : ControllerBase
         return Ok(blog);
     }
 
-    [HttpGet("topics")]
-    public async Task<ActionResult> GetAllTopics()
+    [HttpGet("tags")]
+    public async Task<ActionResult> GetAllTags()
     {
-        var tags = await _blogService.GetAllTopics();
+        var tags = await _blogService.GetAllTags();
         return Ok(tags);
     }
 
-    [HttpGet("topic/{topic}")]
-    public async Task<ActionResult> GetBlogsByTopic(string topic)
+    [HttpGet("tag/{tag}")]
+    public async Task<ActionResult> GetBlogsByTag(string tag)
     {
-        var blogs = await _blogService.GetBlogsByTopic(topic);
+        var blogs = await _blogService.GetBlogsByTag(tag);
         return Ok(blogs);
     }
 
@@ -58,16 +58,16 @@ public class BlogController : ControllerBase
     }
 
     [HttpPut("{blogId}")]
-    public async Task<ActionResult> UpdateBlog(string blogId, [FromBody] BlogRequest request, string[] secreteKey)
+    public async Task<ActionResult> UpdateBlog(string blogId, [FromBody] BlogRequest request, [FromHeader] string[] secreteKey)
     {
         await _blogService.UpdateBlog(blogId, request, secreteKey);
         return NoContent();
     }
 
     [HttpDelete("{blogId}")]
-    public async Task<ActionResult> DeleteBlog(string blogId)
+    public async Task<ActionResult> DeleteBlog(string blogId, [FromHeader] string[] secreteKey)
     {
-        await _blogService.DeleteBlog(blogId);
+        await _blogService.DeleteBlog(blogId , secreteKey);
         return NoContent();
     }
 }
